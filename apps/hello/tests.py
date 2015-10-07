@@ -1,8 +1,9 @@
+import datetime
 from django.test import TestCase
+from apps.hello.models import Contact
 
 # Create your tests here.
-from apps.hello.models import Contact
-import datetime
+
 
 class SomeTests(TestCase):
     def test_math(self):
