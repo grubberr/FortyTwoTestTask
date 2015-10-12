@@ -11,14 +11,14 @@ class Migration(SchemaMigration):
         # Adding model 'Contact'
         db.create_table(u'hello_contact', (
             (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('name', self.gf('django.db.models.fields.CharField')(max_length=200)),
-            ('surname', self.gf('django.db.models.fields.CharField')(max_length=200)),
+            ('name', self.gf('django.db.models.fields.CharField')(max_length=256)),
+            ('surname', self.gf('django.db.models.fields.CharField')(max_length=256)),
             ('date_of_birth', self.gf('django.db.models.fields.DateField')()),
             ('bio', self.gf('django.db.models.fields.TextField')()),
             ('other_contacts', self.gf('django.db.models.fields.TextField')()),
             ('email', self.gf('django.db.models.fields.EmailField')(max_length=75)),
             ('jabber', self.gf('django.db.models.fields.EmailField')(max_length=75)),
-            ('skype', self.gf('django.db.models.fields.CharField')(max_length=200)),
+            ('skype', self.gf('django.db.models.fields.CharField')(max_length=256)),
         ))
         db.send_create_signal(u'hello', ['Contact'])
 
@@ -36,10 +36,10 @@ class Migration(SchemaMigration):
             'email': ('django.db.models.fields.EmailField', [], {'max_length': '75'}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'jabber': ('django.db.models.fields.EmailField', [], {'max_length': '75'}),
-            'name': ('django.db.models.fields.CharField', [], {'max_length': '200'}),
+            'name': ('django.db.models.fields.CharField', [], {'max_length': '256'}),
             'other_contacts': ('django.db.models.fields.TextField', [], {}),
-            'skype': ('django.db.models.fields.CharField', [], {'max_length': '200'}),
-            'surname': ('django.db.models.fields.CharField', [], {'max_length': '200'})
+            'skype': ('django.db.models.fields.CharField', [], {'max_length': '256'}),
+            'surname': ('django.db.models.fields.CharField', [], {'max_length': '256'})
         }
     }
 
