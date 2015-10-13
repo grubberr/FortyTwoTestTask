@@ -9,26 +9,12 @@
   "is_active": true, 
   "is_superuser": true, 
   "is_staff": true, 
-  "last_login": "2015-10-12T12:34:01.190Z", 
+  "last_login": "2015-10-13T15:06:30.073Z", 
   "groups": [], 
   "user_permissions": [], 
   "password": "pbkdf2_sha256$12000$aaifdBxhmJQC$K6QJ2OCkAAQQskM2hq9vZoVHJzG9QDJPnoLFX1E9tb4=", 
   "email": "grubberr@gmail.com", 
   "date_joined": "2015-10-12T12:34:01.190Z"
- }
-},
-{
- "pk": 1, 
- "model": "hello.contact", 
- "fields": {
-  "bio": "python developer", 
-  "surname": "Chvalyuk", 
-  "name": "Sergey", 
-  "jabber": "grubberr@gmail.com", 
-  "date_of_birth": "1981-09-19", 
-  "skype": "sergey_ant", 
-  "other_contacts": "grubberr@gmail.com", 
-  "email": "grubberr@gmail.com"
  }
 }
 ]
