@@ -1,4 +1,27 @@
-span {
-    font-family: Georgia, serif;
+
+.container {
+    width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.box {
+    width: 49%;
+    display: inline-block;
+    vertical-align:top;
+}
+
+.title {
+    padding: 2px;
     font-size: 22px;
+    font-family: Georgia, serif;
+    font-weight: normal;
+    line-height: 26px;
+}
+
+.text {
+    padding: 2px;
+    font-size: 14px;
+    font-family: Georgia, serif;
+    line-height: 18px;
 }

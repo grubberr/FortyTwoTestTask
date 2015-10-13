@@ -1,30 +1,20 @@
 {% extends "base.html" %}
 
 {% block content %}
-<table>
-<tr>
-    <td><span>42 Coffee Cups Test Assignment</span></td>
-    <td></td>
-<tr>
-<tr>
-    <td>{{ contact.name }}</td>
-    <td>Contacts</td>
-<tr>
-<tr>
-    <td>{{ contact.surname }}</td>
-    <td>Email: {{ contact.email }}</td>
-<tr>
-<tr>
-    <td>{{ contact.date_of_birth }}</td>
-    <td>
-        Jabber: {{ contact.jabber }}
-        <br/>
-        Skype: {{ contact.skype }}
-    </td>
-<tr>
-<tr>
-    <td>Bio: {{ contact.bio }}</td>
-    <td>Other contacts: {{ contact.other_contacts }}</td>
-<tr>
-</table>
+<div class="container">
+<h3 class="title"> 42 Coffee Cups Test Assignment </h3>
+    <div class="box">
+        <div class="text">{{ contact.name }}</div>
+        <div class="text">{{ contact.surname }}</div>
+        <div class="text">{{ contact.date_of_birth }}</div>
+        <div class="text">Bio: {{ contact.bio }}</div>
+    </div>
+    <div class="box">
+        <div class="text">Contacts</div>
+        <div class="text">Email: {{ contact.email }}</div>
+        <div class="text">Jabber: {{ contact.jabber }} </div>
+        <div class="text">Skype: {{ contact.skype }} </div>
+        <div class="text">Other contacts: {{ contact.other_contacts }}</div>
+    </div>
+</div>
 {% endblock %}
