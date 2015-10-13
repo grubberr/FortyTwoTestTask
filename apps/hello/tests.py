@@ -8,11 +8,24 @@ from apps.hello.models import Contact
 class SomeTests(TestCase):
     def test_math(self):
         "put docstrings in your tests"
-        assert(2 + 2 == 4)
+        self.assertEqual(2 + 2, 4)
 
     def test_my_contact(self):
-        "put docstrings in your tests"
+        "test data"
+
+        self.assertEqual(len(Contact.objects.all()), 1)
+
         contact = Contact.objects.get()
-        assert(contact.name == 'Sergey')
-        assert(contact.surname == 'Chvalyuk')
-        assert(contact.date_of_birth == datetime.date(1981, 9, 19))
+        self.assertEqual(contact.name, 'Sergey')
+        self.assertEqual(contact.surname, 'Chvalyuk')
+        self.assertEqual(contact.date_of_birth, datetime.date(1981, 9, 19))
+
+    def test_web(self):
+        " test web "
+
+        response = self.client.get('/')
+        self.assertEqual(response.status_code, 301)
+        response = self.client.get(response.url)
+        self.assertEqual(response.status_code, 200)
+        self.assertTrue(response.content.find('Sergey') > -1)
+        self.assertTrue(response.content.find('Chvalyuk') > -1)
