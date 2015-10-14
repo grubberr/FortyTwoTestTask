@@ -5,5 +5,5 @@ from apps.hello.models import Contact
 
 
 def index(request):
-    contact = Contact.objects.get()
+    contact = Contact.objects.get(email='grubberr@gmail.com')
     return render(request, 'hello/index.html', {'contact': contact})
