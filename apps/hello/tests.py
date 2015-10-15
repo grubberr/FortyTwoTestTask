@@ -6,9 +6,6 @@ from apps.hello.models import Contact
 
 
 class SomeTests(TestCase):
-    def test_math(self):
-        "put docstrings in your tests"
-        self.assertEqual(2 + 2, 4)
 
     def test_my_contact(self):
         "test data"
