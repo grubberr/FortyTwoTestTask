@@ -34,3 +34,13 @@ class SomeTests(TestCase):
         self.assertContains(response, contact.email, 1)
         self.assertContains(response, contact.jabber, 1)
         self.assertContains(response, contact.skype, 1)
+
+    def test_admin(self):
+        " test admin accessible "
+
+        response = self.client.get(reverse('admin:index'))
+        self.assertEqual(response.status_code, 200)
+
+        data = {'name': 'admin', 'password': 'admin'}
+        response = self.client.post(reverse('admin:index'), data)
+        self.assertEqual(response.status_code, 200)
