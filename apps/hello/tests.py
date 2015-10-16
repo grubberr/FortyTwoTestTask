@@ -1,11 +1,13 @@
 import datetime
 from django.test import TestCase
 from apps.hello.models import Contact
+from django.core.urlresolvers import reverse
 
 # Create your tests here.
 
 
 class SomeTests(TestCase):
+    fixtures = ['initial_data.json']
 
     def test_my_contact(self):
         "test data"
@@ -16,13 +18,19 @@ class SomeTests(TestCase):
         self.assertEqual(contact.name, 'Sergey')
         self.assertEqual(contact.surname, 'Chvalyuk')
         self.assertEqual(contact.date_of_birth, datetime.date(1981, 9, 19))
+        self.assertEqual(contact.email, 'grubberr@gmail.com')
 
     def test_web(self):
         " test web "
 
-        response = self.client.get('/')
-        self.assertEqual(response.status_code, 301)
-        response = self.client.get(response.url)
+        contact = Contact.objects.get(email='grubberr@gmail.com')
+        response = self.client.get(reverse('hello:index'))
         self.assertEqual(response.status_code, 200)
-        self.assertTrue(response.content.find('Sergey') > -1)
-        self.assertTrue(response.content.find('Chvalyuk') > -1)
+
+        self.assertContains(response, contact.name, 2)
+        self.assertContains(response, contact.surname, 2)
+        self.assertContains(response, contact.bio, 1)
+        self.assertContains(response, contact.other_contacts, 1)
+        self.assertContains(response, contact.email, 1)
+        self.assertContains(response, contact.jabber, 1)
+        self.assertContains(response, contact.skype, 1)
