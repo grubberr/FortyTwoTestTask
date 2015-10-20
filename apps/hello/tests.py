@@ -44,3 +44,10 @@ class SomeTests(TestCase):
         data = {'name': 'admin', 'password': 'admin'}
         response = self.client.post(reverse('admin:index'), data)
         self.assertEqual(response.status_code, 200)
+
+    def test_empty(self):
+        " test empty "
+
+        Contact.objects.all().delete()
+        response = self.client.get(reverse('hello:index'))
+        self.assertEqual(response.status_code, 404)
