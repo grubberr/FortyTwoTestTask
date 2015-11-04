@@ -19,6 +19,7 @@ class SomeTests(TestCase):
         self.assertEqual(contact.surname, 'Chvalyuk')
         self.assertEqual(contact.date_of_birth, datetime.date(1981, 9, 19))
         self.assertEqual(contact.email, 'grubberr@gmail.com')
+        self.assertEqual(contact.skype, 'sergey_ant')
 
     def test_web(self):
         " test web "
