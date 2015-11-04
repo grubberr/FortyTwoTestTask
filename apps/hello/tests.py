@@ -46,6 +46,10 @@ class SomeTests(TestCase):
         response = self.client.post(reverse('admin:index'), data)
         self.assertEqual(response.status_code, 200)
 
+    def test_auth_admin(self):
+        " test if admin / admin exists "
+        self.assertTrue(self.client.login(username='admin', password='admin'))
+
     def test_empty(self):
         " test empty "
 
