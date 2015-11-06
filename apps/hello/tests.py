@@ -2,7 +2,6 @@ import datetime
 from django.test import TestCase
 from django.core.urlresolvers import reverse
 from apps.hello.models import Contact
-from apps.hello.utils import get_object_or_none
 
 
 class SomeTests(TestCase):
@@ -57,11 +56,16 @@ class SomeTests(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, 'Business Card Not Found', 2)
 
-    def test_get_object_or_none(self):
-        " test helper get_object_or_none function "
+    def test_multi_records(self):
+        " test multi records "
 
-        contact = get_object_or_none(Contact, email='grubberr@gmail.com')
-        self.assertIsNotNone(contact)
-        Contact.objects.all().delete()
-        contact = get_object_or_none(Contact, email='grubberr@gmail.com')
-        self.assertIsNone(contact)
+        Contact.objects.create(
+            name='rarename',
+            email='email@domain.com',
+            date_of_birth=datetime.date(2000, 1, 1))
+
+        self.assertEqual(len(Contact.objects.all()), 2)
+        contact = Contact.objects.get(email='grubberr@gmail.com')
+        response = self.client.get(reverse('hello:index'))
+        self.assertContains(response, contact.email, 1)
+        self.assertNotContains(response, 'rarename')
