@@ -1,9 +1,7 @@
 import datetime
 from django.test import TestCase
-from apps.hello.models import Contact
 from django.core.urlresolvers import reverse
-
-# Create your tests here.
+from apps.hello.models import Contact
 
 
 class SomeTests(TestCase):
