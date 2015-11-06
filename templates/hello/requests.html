@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block title %}
+(10) new records
+{% endblock %}
+
+{% block extra_head %}
+<script type="text/javascript" charset="utf8" src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" charset="utf8" src="{{ STATIC_URL }}js/requests.js"></script>
+{% endblock %}
+
+{% block content %}
+    <div id="display"></div>
+{% endblock %}

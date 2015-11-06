@@ -3,5 +3,6 @@ from apps.hello import views
 
 urlpatterns = patterns(
     '',
-    url(r'^$', views.index, name='index')
+    url(r'^$', views.index, name='index'),
+    url(r'^requests/$', views.requests, name='requests')
 )

@@ -10,3 +10,10 @@ class Contact(models.Model):
     email = models.EmailField(unique=True)
     jabber = models.EmailField()
     skype = models.CharField(max_length=256)
+
+
+class Request(models.Model):
+    remote_addr = models.GenericIPAddressField()
+    date_time = models.DateTimeField(auto_now=True, auto_now_add=True)
+    request = models.CharField(max_length=256)
+    status_code = models.IntegerField()
