@@ -1,24 +1,32 @@
 {% extends "base.html" %}
 
 {% block title %}
-    {{ contact.name }} {{ contact.surname }} Business Card
+    {% if contact %}
+        {{ contact.name }} {{ contact.surname }} Business Card
+    {% else %}
+        Business Card Not Found
+    {% endif %}
 {% endblock %}
 
 {% block content %}
 <div class="container">
 <h3 class="title"> 42 Coffee Cups Test Assignment </h3>
-    <div class="box">
-        <div class="text">{{ contact.name }}</div>
-        <div class="text">{{ contact.surname }}</div>
-        <div class="text">{{ contact.date_of_birth }}</div>
-        <div class="text">Bio: {{ contact.bio }}</div>
-    </div>
-    <div class="box">
-        <div class="text">Contacts</div>
-        <div class="text">Email: {{ contact.email }}</div>
-        <div class="text">Jabber: {{ contact.jabber }} </div>
-        <div class="text">Skype: {{ contact.skype }} </div>
-        <div class="text">Other contacts: {{ contact.other_contacts }}</div>
-    </div>
+    {% if contact %}
+        <div class="box">
+            <div class="text">{{ contact.name }}</div>
+            <div class="text">{{ contact.surname }}</div>
+            <div class="text">{{ contact.date_of_birth }}</div>
+            <div class="text">Bio: {{ contact.bio }}</div>
+        </div>
+        <div class="box">
+            <div class="text">Contacts</div>
+            <div class="text">Email: {{ contact.email }}</div>
+            <div class="text">Jabber: {{ contact.jabber }} </div>
+            <div class="text">Skype: {{ contact.skype }} </div>
+            <div class="text">Other contacts: {{ contact.other_contacts }}</div>
+        </div>
+    {% else %}
+        <p> Business Card Not Found </p>
+    {% endif %}
 </div>
 {% endblock %}
