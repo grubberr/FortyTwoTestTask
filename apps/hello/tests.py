@@ -1,14 +1,16 @@
+# -*- coding: utf-8 -*-
+
 import datetime
 from django.test import TestCase
 from django.core.urlresolvers import reverse
 from apps.hello.models import Contact
 
 
-class SomeTests(TestCase):
+class HelloAppTests(TestCase):
     fixtures = ['initial_data.json']
 
-    def test_my_contact(self):
-        "test data"
+    def test_my_contact_in_database(self):
+        " test that in fixtures only one my personal contact "
 
         self.assertEqual(len(Contact.objects.all()), 1)
 
@@ -19,10 +21,31 @@ class SomeTests(TestCase):
         self.assertEqual(contact.email, 'grubberr@gmail.com')
         self.assertEqual(contact.skype, 'sergey_ant')
 
-    def test_web(self):
-        " test web "
+    def test_my_contact_in_web(self):
+        " test that web page shows my personal contact "
 
-        contact = Contact.objects.get(email='grubberr@gmail.com')
+        response = self.client.get(reverse('hello:index'))
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, 'Sergey', 2)
+        self.assertContains(response, 'Chvalyuk', 2)
+        self.assertContains(response, 'grubberr@gmail.com', 1)
+        self.assertContains(response, 'grubberr@jabber.com', 1)
+        self.assertContains(response, 'sergey_ant', 1)
+
+    def test_multi_database_records(self):
+        " test that web page shows the first record from database "
+
+        Contact.objects.create(
+            name='John',
+            surname='Smith',
+            email='john@domain.com',
+            date_of_birth=datetime.date(2000, 1, 1),
+            jabber='jabber@domain.com',
+            skype='skype_id')
+
+        self.assertEqual(len(Contact.objects.all()), 2)
+
+        contact = Contact.objects.first()
         response = self.client.get(reverse('hello:index'))
         self.assertEqual(response.status_code, 200)
 
@@ -33,6 +56,33 @@ class SomeTests(TestCase):
         self.assertContains(response, contact.email, 1)
         self.assertContains(response, contact.jabber, 1)
         self.assertContains(response, contact.skype, 1)
+
+    def test_not_found(self):
+        "test web page shows 'not found' if database is empty"
+
+        Contact.objects.all().delete()
+        response = self.client.get(reverse('hello:index'))
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, 'Business Card Not Found', 2)
+
+    def test_unicode(self):
+        """
+        test that we can store contact with unicode characters
+        and see it on web page
+        """
+
+        Contact.objects.all().delete()
+
+        Contact.objects.create(
+            name=u'Джон',
+            surname=u'Смит',
+            date_of_birth=datetime.date(2000, 1, 1),
+            email='john@domain.com')
+
+        response = self.client.get(reverse('hello:index'))
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, u'Джон', 2)
+        self.assertContains(response, u'Смит', 2)
 
     def test_admin(self):
         " test admin accessible "
@@ -47,25 +97,3 @@ class SomeTests(TestCase):
     def test_auth_admin(self):
         " test if admin / admin exists "
         self.assertTrue(self.client.login(username='admin', password='admin'))
-
-    def test_empty(self):
-        " test empty "
-
-        Contact.objects.all().delete()
-        response = self.client.get(reverse('hello:index'))
-        self.assertEqual(response.status_code, 200)
-        self.assertContains(response, 'Business Card Not Found', 2)
-
-    def test_multi_records(self):
-        " test multi records "
-
-        Contact.objects.create(
-            name='rarename',
-            email='email@domain.com',
-            date_of_birth=datetime.date(2000, 1, 1))
-
-        self.assertEqual(len(Contact.objects.all()), 2)
-        contact = Contact.objects.get(email='grubberr@gmail.com')
-        response = self.client.get(reverse('hello:index'))
-        self.assertContains(response, contact.email, 1)
-        self.assertNotContains(response, 'rarename')
