@@ -1,4 +1,4 @@
-$(document).ready(function() {
+function requests(url) {
 
     var last_date_time = null;
     var new_records = 0;
@@ -6,7 +6,7 @@ $(document).ready(function() {
 
     var f = function() {
 
-        $.getJSON('/hello/requests/', function(data) {
+        $.getJSON(url, function(data) {
 
             var elems = [];
 
@@ -43,4 +43,4 @@ $(document).ready(function() {
     f()
     setInterval(f, 2000);
 
-});
+}

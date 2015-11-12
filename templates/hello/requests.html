@@ -7,6 +7,11 @@
 {% block extra_head %}
 <script type="text/javascript" charset="utf8" src="//code.jquery.com/jquery-1.11.3.min.js"></script>
 <script type="text/javascript" charset="utf8" src="{{ STATIC_URL }}js/requests.js"></script>
+<script type="text/javascript" charset="utf8">
+$(document).ready(function() {
+    requests('{% url 'hello:requests' %}');
+} );
+</script>
 {% endblock %}
 
 {% block content %}
