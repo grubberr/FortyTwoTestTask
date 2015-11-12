@@ -15,7 +15,7 @@ $(document).ready(function() {
                 var date_time = new Date(item.fields.date_time);
 
                 elems.unshift(
-                    '<p>' + 
+                    '<p>' +
                     item.fields.remote_addr + ' - ' +
                     '[' + item.fields.date_time + '] ' +
                     '"' + item.fields.request + '" ' +
@@ -39,7 +39,7 @@ $(document).ready(function() {
 
         });
     }
-    
+
     f()
     setInterval(f, 2000);
 
