@@ -13,5 +13,5 @@ def requests(request):
     if request.is_ajax():
         records = Request.objects.order_by('-date_time')[:10]
         data = serializers.serialize('json', records)
-        return HttpResponse(data, content_type='json')
+        return HttpResponse(data, content_type='application/json')
     return render(request, 'hello/requests.html')
