@@ -28,5 +28,9 @@
     {% else %}
         <p> Business Card Not Found </p>
     {% endif %}
+    <hr/>
+    <div>
+        <a href="{% url 'hello:requests' %}">requests</a>
+    </div>
 </div>
 {% endblock %}
