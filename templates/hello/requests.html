@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block title %}
-(10) new records
+({{ records|length }}) new records
 {% endblock %}
 
 {% block extra_head %}
@@ -15,5 +15,9 @@ $(document).ready(function() {
 {% endblock %}
 
 {% block content %}
-    <div id="display"></div>
+    <div id="display" class="container">
+    {% for record in records %}
+        <p>{{ record.remote_addr }} - [{{ record.date_time|date:"d/M/Y H:i:s" }}] "{{ record.request }}" {{ record.status_code }}</p>
+    {% endfor %}
+    </div>
 {% endblock %}

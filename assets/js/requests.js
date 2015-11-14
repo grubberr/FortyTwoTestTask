@@ -1,3 +1,13 @@
+function datetime_format(d) {
+    var month = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+    return ('0' + d.getUTCDate()).slice(-2) + '/' +
+           month[d.getUTCMonth()] + '/' +
+           d.getUTCFullYear() + ' ' +
+           ('0' + d.getUTCHours()).slice(-2) + ':' +
+           ('0' + d.getUTCMinutes()).slice(-2) + ':' +
+           ('0' + d.getUTCSeconds()).slice(-2);
+}
+
 function requests(url) {
 
     var last_date_time = null;
@@ -17,7 +27,7 @@ function requests(url) {
                 elems.unshift(
                     '<p>' +
                     item.fields.remote_addr + ' - ' +
-                    '[' + item.fields.date_time + '] ' +
+                    '[' + datetime_format(date_time) + '] ' +
                     '"' + item.fields.request + '" ' +
                     item.fields.status_code +
                     '</p>');
